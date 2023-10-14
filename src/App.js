@@ -1,25 +1,37 @@
-import logo from './logo.svg';
 import './App.css';
+import Landing from './components/Landing/Landing.js';
+import Detail from './components/Detailpage/Detail.js';
+import Header from './components/header/Header';
+import Footer from './components/Footer/Footer';
+import {Routes , Route , Navigate} from "react-router-dom";
+import Productscontextprovider from './context/Productscontextprovider';
+import CartContextProvider from './context/CartContextProvider';
+import Login from './components/login/Login.js'
+import Signup from './components/login/Signup'
+import Cartshop from './components/Cart/cartshop/Cartshop';
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <Productscontextprovider>
+     <CartContextProvider>
+     <Header />
+    <Routes>
+      <Route path='/' element={<Landing />}/>
+      <Route path='/detail/:id' element={<Detail />}/>
+      <Route path='/signup' element={<Signup />}/>
+      <Route path='/login' element={<Login />}/>
+      <Route path='/cartshop' element={<Cartshop />}/>
+      <Route path='/*' element={<Navigate to="/" />}/>
+    </Routes>
+    <Footer />
+     </CartContextProvider>
+    </Productscontextprovider>
+    </>
   );
 }
 
 export default App;
+
